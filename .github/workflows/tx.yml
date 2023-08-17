@@ -45,6 +45,13 @@ jobs:
       - name: Set rpcUrl, wsUrl, and gasPrice environment variables
         run: |
           case "${{ github.event.inputs.env }}" in
+            "axon-devnet")
+              echo "rpcUrl=https://axon-debug.ckbapp.dev" >> $GITHUB_ENV
+              echo "wsUrl=ws://axon-debug.ckbapp.dev/ws" >> $GITHUB_ENV
+              echo "gasPrice=8" >> $GITHUB_ENV
+              echo "to=0x32308929C30b604836ed2243c25432F7df8bBb85" >> $GITHUB_ENV
+              echo "payload=0x7ff36ab5000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000800000000000000000000000009dd3c285f8c253fb6327549e46f82e3dedf59e3400000000000000000000000000000000000000000000000000005af3107a3fff00000000000000000000000000000000000000000000000000000000000000020000000000000000000000007c2f5b5d7d3aab0e917e06b0109cee394d1a0d2e0000000000000000000000009213ea93c4e6a6a8fc5b77ff1a169f65d509f50f" >> $GITHUB_ENV
+              ;;
             "fantom_testnet")
               echo "rpcUrl=https://rpc.testnet.fantom.network" >> $GITHUB_ENV
               echo "wsUrl=wss://fantom-testnet.public.blastapi.io/" >> $GITHUB_ENV
