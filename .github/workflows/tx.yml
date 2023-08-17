@@ -8,6 +8,7 @@ on:
         description: Environment
         required: true
         options:
+          - axon-devnet
           - fantom_testnet
           - axon-alphanet
           - testnet
