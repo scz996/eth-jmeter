@@ -87,9 +87,6 @@ jobs:
               ;;
           esac
 
-      - name: Build with Maven
-        run: mvn clean package --file pom.xml -q
-
       - name: Start EthStats workflow
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -99,6 +96,9 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${{ github.actor }}/eth-performance/actions/workflows/ethStats.yml/dispatches \
             -d '{"ref":"main", "inputs": {"jarArg": "${{ env.wsUrl }}", "gistId": "${{ github.event.inputs.gistId }}"}}'
+
+      - name: Build with Maven
+        run: mvn clean package --file pom.xml -q
 
       - name: jmeter run
         env:
@@ -124,6 +124,7 @@ jobs:
             sed -i 's|<stringProp name="Argument.value">payloadValue</stringProp>|<stringProp name="Argument.value">${{ env.payload }}</stringProp>|g' src/test/jmeter/${{ github.event.inputs.jmeterJmx }}
           fi
           mvn jmeter:jmeter@configuration -DjmeterTest=${{ github.event.inputs.jmeterJmx }}
+          sleep 30
           update_gist "stopTps"
           sleep 5
           update_gist "successRate"
