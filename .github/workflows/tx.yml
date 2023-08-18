@@ -124,7 +124,7 @@ jobs:
             sed -i 's|<stringProp name="Argument.value">payloadValue</stringProp>|<stringProp name="Argument.value">${{ env.payload }}</stringProp>|g' src/test/jmeter/${{ github.event.inputs.jmeterJmx }}
           fi
           mvn jmeter:jmeter@configuration -DjmeterTest=${{ github.event.inputs.jmeterJmx }}
-          sleep 30
+          sleep 20
           update_gist "stopTps"
           sleep 5
           update_gist "successRate"
