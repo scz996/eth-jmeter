@@ -127,4 +127,4 @@ jobs:
           sleep 15
           update_gist "stopTps"
           sleep 5
-          update_gist "successRate"
+          update_gist "exit"
